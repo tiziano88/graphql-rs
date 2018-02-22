@@ -9,7 +9,7 @@ trait GraphQL {
     fn query() -> String;
 }
 
-#[proc_macro_derive(GraphQL)]
+#[proc_macro_derive(GraphQL, attributes(serde))]
 pub fn graph_ql(input: TokenStream) -> TokenStream {
     let s = input.to_string();
 

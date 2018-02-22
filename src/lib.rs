@@ -10,9 +10,10 @@ mod tests {
     use super::GraphQL;
 
     #[derive(GraphQL)]
+    #[serde(rename_all = "camelCase")]
     struct Repository {
         name: String,
-        url: String,
+        #[serde(rename = "xxx")] url: String,
         fork_count: i32,
     }
 
