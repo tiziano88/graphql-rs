@@ -26,9 +26,17 @@ fn impl_graph_ql(ast: &syn::DeriveInput) -> quote::Tokens {
     let name = &ast.ident;
     if let syn::Body::Struct(ref variants) = ast.body {
         for f in variants.fields() {
-            if let Some(ref i) = f.ident {
-                q = format!("{}{}\n", q, i);
-            }
+            let field_name = if let Some(rename) = f.attrs.iter().find(|a| a.name() == "rename") {
+                match rename.value {
+                    syn::MetaItem::NameValue(_, syn::Lit::Str(ref v, _)) => v.clone().to_string(),
+                    _ => "xxx".to_string(),
+                }
+            } else if let Some(ref i) = f.ident {
+                format!("{}", i)
+            } else {
+                "xxx".to_string()
+            };
+            q = format!("{}{}\n", q, field_name);
         }
     }
 

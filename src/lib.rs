@@ -14,7 +14,7 @@ mod tests {
     struct Repository {
         name: String,
         #[serde(rename = "xxx")] url: String,
-        fork_count: i32,
+        #[serde(rename = "forkCount")] fork_count: i32,
     }
 
     #[test]
