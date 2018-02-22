@@ -18,6 +18,14 @@ mod tests {
 
     #[test]
     fn it_works() {
-        assert_eq!(Repository::query(), "xxx");
+        assert_eq!(
+            Repository::query(),
+            "{
+name
+url
+fork_count
+}
+"
+        );
     }
 }

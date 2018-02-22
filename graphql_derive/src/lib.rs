@@ -21,16 +21,18 @@ pub fn graph_ql(input: TokenStream) -> TokenStream {
 }
 
 fn impl_graph_ql(ast: &syn::DeriveInput) -> quote::Tokens {
-    let mut q = "".to_string();
+    let mut q = "{\n".to_string();
 
     let name = &ast.ident;
     if let syn::Body::Struct(ref variants) = ast.body {
         for f in variants.fields() {
             if let Some(ref i) = f.ident {
-                q = format!("{}{}", q, i);
+                q = format!("{}{}\n", q, i);
             }
         }
     }
+
+    q.push_str("}\n");
 
     quote!{
         impl GraphQL for #name {
