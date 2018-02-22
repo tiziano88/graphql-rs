@@ -1,7 +1,11 @@
 [package]
-name = "graphql"
+name = "graphql_derive"
 version = "0.1.0"
 authors = ["Tiziano Santoro <tiziano88@gmail.com>"]
 
+[lib]
+proc-macro = true
+
 [dependencies]
-graphql_derive = { path = "graphql_derive" }
+syn = "0.11"
+quote = "0.3"
